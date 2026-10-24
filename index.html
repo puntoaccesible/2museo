@@ -22,30 +22,51 @@
             background-color: #0b132b !important;
             color: #ffffff !important;
         }
+        /* CLASE PARA INVERTIR A MODO ALTO CONTRASTE: NEGRO CON AMARILLO */
+        body.contraste-invertido {
+            background-color: #000000 !important;
+            color: #ffff00 !important; /* Texto Amarillo Puro */
+        }
 
         body.contraste-invertido .contenido-sala,
         body.contraste-invertido .tarjeta-submodulo,
-        body.contraste-invertido .panel-herramientas {
-            background-color: #1c2541 !important;
-            color: #ffffff !important;
-            border-color: #007bff !important;
+        body.contraste-invertido .panel-herramientas,
+        body.contraste-invertido .seccion-talleres-bloque {
+            background-color: #000000 !important;
+            color: #ffff00 !important;
+            border-color: #ffff00 !important; /* Bordes amarillos para delimitar el espacio */
+        }
+
+        body.contraste-invertido h1,
+        body.contraste-invertido h2,
+        body.contraste-invertido h3,
+        body.contraste-invertido h4 {
+            color: #ffff00 !important;
+        }
+
+        body.contraste-invertido p,
+        body.contraste-invertido li,
+        body.contraste-invertido span {
+            color: #ffff00 !important;
         }
 
         body.contraste-invertido .btn-acc {
-            background-color: #333333 !important;
-            color: #ffffff !important;
-            border: 1px solid #ffffff !important;
+            background-color: #000000 !important;
+            color: #ffff00 !important;
+            border: 2px solid #ffff00 !important;
         }
 
         body.contraste-invertido .lienzo-haptico-laboratorio {
             background-color: #000000 !important;
-            border-color: #00ffcc !important;
+            border-color: #ffff00 !important;
         }
 
-        body.contraste-invertido .seccion-talleres-bloque {
-            background-color: #000000 !important;
-            border-color: #ff007f !important;
+        body.contraste-invertido .zona-sensorial-muro {
+            color: #ffff00 !important;
+            border-color: #ffff00 !important;
+            background-color: rgba(255, 255, 0, 0.05) !important;
         }
+
 
         /* DISEÑO DE INTERFAZ LIMPIA */
         .contenido-sala {
