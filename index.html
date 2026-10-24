@@ -1,21 +1,24 @@
 <!DOCTYPE html>
-<html lang="es" id="vei-raiz" style="font-size: 16px;">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prototipo VEI - Punto INCLUYENTE</title>
-    <style>
-        /* BASE NEUROERGONÓMICA CON ENFOQUE EN ALTO CONTRASTE */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #ffffff;
-            color: #000000;
-            margin: 0;
-            padding: 20px;
-            text-align: left;
-            line-height: 1.5;
-            transition: background-color 0.2s, color 0.2s;
-        }
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+    <div class="contenido-sala">
+        <!-- BARRA DE HERRAMIENTAS INTERACTIVA -->
+        <header class="panel-accesibilidad" aria-label="Herramientas de accesibilidad">
+            <div class="panel-titulo">🌐 Panel de Accesibilidad (Prototipo VEI / Punto INCLUYENTE)</div>
+            <div class="botones-grupo">
+                <button class="btn-acc" onclick="cambiarContraste()" aria-label="Cambiar a alto contraste">🌓 Alto Contraste</button>
+                <button class="btn-acc" onclick="modificarTexto(2)" aria-label="Aumentar tamaño de letra">A+ Aumentar Letra</button>
+                <button class="btn-acc" onclick="modificarTexto(-2)" aria-label="Disminuir tamaño de letra">A- Disminuir Letra</button>
+                <button class="btn-acc" onclick="restablecer()" aria-label="Restablecer valores">🔄 Restablecer</button>
+            </div>
+        </header>
 
         /* CLASE PARA INVERTIR A MODO OSCURO / ALTO CONTRASTE AL TOCAR EL BOTÓN */
         
