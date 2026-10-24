@@ -205,80 +205,101 @@
                     <button class="btn-acc" id="boton-avance-serie" onclick="simularAvanceSerie()" style="background-color: #475569; color: white; border: none; font-weight: bold;">
                         Ir a la Siguiente Obra ➡️
                     </button>
-👇 LABORATORIO HÁPTICO: Desliza tu dedo o mouse dentro de las zonas para sentir texturas:
-CUERPO ESCULTÓRICO
-(Relieve Sólido Liso)
+                <p style="font-size: 0.9rem; color: #475569; font-weight: bold; margin-bottom: 5px;">👇 LABORATORIO HÁPTICO: Desliza tu dedo o mouse dentro de las zonas para sentir texturas:</p>
+                
+                <div class="lienzo-haptico-laboratorio">
+                    <div class="zona-sensorial-muro" id="haptico-forma" 
+                         onmousemove="ejecutarPulso('lisa')" ontouchmove="ejecutarPulso('lisa')">
+                        CUERPO ESCULTÓRICO<br>(Relieve Sólido Liso)
+                    </div>
+                    <div class="zona-sensorial-muro" id="haptico-deterioro" 
+                         onmousemove="ejecutarPulso('deterioro')" ontouchmove="ejecutarPulso('deterioro')">
+                        CÚPULA SUPERIOR<br>(Textura de Deterioro)
+                    </div>
+                    <div class="zona-sensorial-muro" id="haptico-autodestruccion" 
+                         onmousemove="ejecutarPulso('vacio')" ontouchmove="ejecutarPulso('vacio')">
+                        BASE DAÑADA<br>(Silencio / Autodestrucción)
+                    </div>
+                </div>
+            </div>
 
+            <h2>💼 Catálogo de Servicios y Talleres de Sensibilización</h2>
+            <p>Nuestra consultoría complementa la plataforma tecnológica mediante programas de capacitación humana especializada para el factor humano de las instituciones:</p>
+            
+            <div class="seccion-talleres-bloque">
+                <h4 style="margin-top:0; color: #ff007f; font-size: 1.2rem; font-weight: bold;">👁️ Taller A: "Óptica de los Sentidos: Usabilidad en Baja Visión"</h4>
+                <p style="font-size:1rem; margin-bottom: 0;"><strong>Dirigido a:</strong> Optometristas, Oftalmólogos y Curadores. <br>
+                Dinámica inmersiva utilizando gafas modificadas de simulación clínica para experimentar los retos del glaucoma y la degeneración macular en las salas. Capacitación en audiodescripción estructural.</p>
+                
+                <h4 style="margin-top:20px; color: #ff007f; font-size: 1.2rem; font-weight: bold;">👂 Taller B: "Sintonía Inversa: Los Retos de la Percepción Auditiva"</h4>
+                <p style="font-size:1rem; margin-bottom: 0;"><strong>Dirigido a:</strong> Guías de Museos y Personal de Atención al Público. <br>
+                Aislamiento acústico total y simulación de acúfenos (Tinnitus) con reverberación para comprender de forma empírica la fatiga cognitiva del visitante hipoacúsico en entornos monumentales.</p>
+            </div>
+        </main>
+    </div>
 
-CÚPULA SUPERIOR
-(Textura de Deterioro)
+    <script>
+        let tamanoFuenteRaiz = 16;
 
+        function cambiarContraste() {
+            document.body.classList.toggle('contraste-invertido');
+        }
 
-BASE DAÑADA
-(Silencio / Autodestrucción)
+        function modificarTexto(valor) {
+            tamanoFuenteRaiz += valor;
+            if (tamanoFuenteRaiz < 12) tamanoFuenteRaiz = 12;
+            if (tamanoFuenteRaiz > 26) tamanoFuenteRaiz = 26;
+            document.getElementById("vei-raiz").style.fontSize = tamanoFuenteRaiz + "px";
+        }
 
+        function restablecer() {
+            tamanoFuenteRaiz = 16;
+            document.body.classList.remove('contraste-invertido');
+            document.getElementById("vei-raiz").style.fontSize = "16px";
+        }
 
-💼 Catálogo de Servicios y Talleres de Sensibilización
-Nuestra consultoría complementa la plataforma tecnológica mediante programas de capacitación humana especializada para el factor humano de las instituciones:
-👁️ Taller A: "Óptica de los Sentidos: Usabilidad en Baja Visión"
-Dirigido a: Optometristas, Oftalmólogos y Curadores. 
+        function reproducirAudiodescripcion() {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                let textoCedula = document.getElementById("texto-cedula-dinamico").innerText;
+                let lectura = new SpeechSynthesisUtterance(textoCedula);
+                lectura.lang = 'es-MX';
+                window.speechSynthesis.speak(lectura);
+            }
+        }
 
-Dinámica inmersiva utilizando gafas modificadas de simulación clínica para experimentar los retos del glaucoma y la degeneración macular en las salas. Capacitación en audiodescripción estructural.
-👂 Taller B: "Sintonía Inversa: Los Retos de la Percepción Auditiva"
-Dirigido a: Guías de Museos y Personal de Atención al Público. 
+        function ejecutarPulso(tipoTextura) {
+            if (!navigator.vibrate) return;
+            if (tipoTextura === "lisa") {
+                navigator.vibrate(30);
+            } 
+            else if (tipoTextura === "deterioro") {
+                navigator.vibrate([15, 15]); // Cosquilleo intermitente clínico para el deterioro
+            } 
+            else if (tipoTextura === "vacio") {
+                navigator.vibrate(0);
+            }
+        }
 
-Aislamiento acústico total y simulación de acúfenos (Tinnitus) con reverberación para comprender de forma empírica la fatiga cognitiva del visitante hipoacúsico en entornos monumentales.
+        let numeroObraActual = 1;
+        function simularAvanceSerie() {
+            window.speechSynthesis.cancel();
+            if (navigator.vibrate) {
+                navigator.vibrate(180); // Pulso háptico corto en mano para avisar cambio de obra
+            }
 
+            numeroObraActual++;
+            if (numeroObraActual > 3) { numeroObraActual = 1; }
 
-let tamanoFuenteRaiz = 16;
-function cambiarContraste() {
-document.body.classList.toggle('contraste-invertido');
-}
-function modificarTexto(valor) {
-tamanoFuenteRaiz += valor;
-if (tamanoFuenteRaiz < 12) tamanoFuenteRaiz = 12;
-if (tamanoFuenteRaiz > 26) tamanoFuenteRaiz = 26;
-document.getElementById("vei-raiz").style.fontSize = tamanoFuenteRaiz + "px";
-}
-function restablecer() {
-tamanoFuenteRaiz = 16;
-document.body.classList.remove('contraste-invertido');
-document.getElementById("vei-raiz").style.fontSize = "16px";
-}
-function reproducirAudiodescripcion() {
-if ('speechSynthesis' in window) {
-window.speechSynthesis.cancel();
-let textoCedula = document.getElementById("texto-cedula-dinamico").innerText;
-let lectura = new SpeechSynthesisUtterance(textoCedula);
-lectura.lang = 'es-MX';
-window.speechSynthesis.speak(lectura);
-}
-}
-function ejecutarPulso(tipoTextura) {
-if (!navigator.vibrate) return;
-if (tipoTextura === "lisa") {
-navigator.vibrate(30);
-}
-else if (tipoTextura === "deterioro") {
-navigator.vibrate(); // Cosquilleo intermitente clínico para el deterioro
-}
-else if (tipoTextura === "vacio") {
-navigator.vibrate(0);
-}
-}
-let numeroObraActual = 1;
-function simularAvanceSerie() {
-window.speechSynthesis.cancel();
-if (navigator.vibrate) {
-navigator.vibrate(180); // Pulso háptico corto en mano para avisar cambio de obra
-}
-numeroObraActual++;
-if (numeroObraActual > 3) { numeroObraActual = 1; }
-if (numeroObraActual === 1) {
-document.getElementById("titulo-obra-dinamico").innerText = "Obra 1: El Vínculo del Arte Universal";
-document.getElementById("texto-cedula-dinamico").innerText = "Esta pieza representa la unión de los canales sensoriales mediante relieves geométricos. Explora la textura con tus manos de izquierda a derecha de forma libre.";
-} else {
-document.getElementById("titulo-obra-dinamico").innerText = "Obra " + numeroObraActual + ": Escultura en Serie Piloto";
-document.getElementById("texto-cedula-dinamico").innerText = "Cédula en Lectura Fácil: Esta es la pieza número " + numeroObraActual + " de la Sala 1. El visitante avanza de forma consecutiva por la sala usando este botón en su mano. El recuadro inferior reconfigura al instante el Laboratorio Háptico para simular las zonas sólidas lisas, el deterioro por erosión o los huecos vacíos por autodestrucción de esta nueva pieza.";
-}
-}
+            if (numeroObraActual === 1) {
+                document.getElementById("titulo-obra-dinamico").innerText = "Obra 1: El Vínculo del Arte Universal";
+                document.getElementById("texto-cedula-dinamico").innerText = "Esta pieza representa la unión de los canales sensoriales mediante relieves geométricos. Explora la textura con tus manos de izquierda a derecha de forma libre.";
+            } else {
+                document.getElementById("titulo-obra-dinamico").innerText = "Obra " + numeroObraActual + ": Escultura en Serie Piloto";
+                document.getElementById("texto-cedula-dinamico").innerText = "Cédula en Lectura Fácil: Esta es la pieza número " + numeroObraActual + " de la Sala 1. El visitante avanza de forma consecutiva por la sala usando este botón en su mano. El recuadro inferior reconfigura al instante el Laboratorio Háptico para simular las zonas sólidas lisas, el deterioro por erosión o los huecos vacíos por autodestrucción de esta nueva pieza.";
+            }
+        }
+    </script>
+</body>
+</html>
+
